@@ -1,8 +1,7 @@
-
 using AbySalto.Mid.Application;
 using AbySalto.Mid.Infrastructure;
 
-namespace AbySalto.Mid
+namespace AbySalto.Mid.WebApi
 {
     public class Program
     {
@@ -13,7 +12,7 @@ namespace AbySalto.Mid
             builder.Services
                 .AddPresentation()
                 .AddApplication()
-                .AddInfrastructure(builder.Configuration);
+                .AddInfrastructure();
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
@@ -32,10 +31,7 @@ namespace AbySalto.Mid
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

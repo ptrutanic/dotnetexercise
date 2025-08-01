@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace AbySalto.Mid.Controllers
+namespace AbySalto.Mid.WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
