@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using AbySalto.Mid.Domain.Entities;
 
-namespace AbySalto.Mid.Infrastructure
+namespace AbySalto.Mid.Infrastructure.Persistence
 {
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {

@@ -1,5 +1,5 @@
 using AbySalto.Mid.Application;
-using AbySalto.Mid.Infrastructure;
+using AbySalto.Mid.Infrastructure.Configuration;
 
 namespace AbySalto.Mid.WebApi
 {
@@ -16,6 +16,7 @@ namespace AbySalto.Mid.WebApi
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
+            builder.Services.AddHttpClient();
 
             builder.Services.AddCors(options =>
             {

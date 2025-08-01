@@ -1,0 +1,29 @@
+
+using System.Text.Json;
+using AbySalto.Mid.Domain.External;
+using AbySalto.Mid.Infrastructure.Configuration;
+
+namespace AbySalto.Mid.Infrastructure.External
+{
+    public class ProductApiFacade(HttpClient httpClient) : IProductApiFacade
+    {
+        private readonly HttpClient _httpClient = httpClient;
+
+        public async Task<ProductListResponseDto> GetProductsAsync()
+        {
+            var response = await _httpClient.GetAsync("https://dummyjson.com/products");
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            var productResponse = JsonSerializer.Deserialize<ProductListResponseDto>(content, JsonOptionsProvider.DefaultOptions);
+
+            if (productResponse == null)
+            {
+                return new ProductListResponseDto();
+            }
+
+            return productResponse;
+        }
+    }
+}

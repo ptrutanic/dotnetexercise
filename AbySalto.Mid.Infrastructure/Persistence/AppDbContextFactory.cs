@@ -1,7 +1,8 @@
+using AbySalto.Mid.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace AbySalto.Mid.Infrastructure
+namespace AbySalto.Mid.Infrastructure.Persistence
 {
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
