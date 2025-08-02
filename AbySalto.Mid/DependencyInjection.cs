@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using AbySalto.Mid.WebApi.Filters;
+using Microsoft.OpenApi.Models;
 
 namespace AbySalto.Mid.WebApi
 {
@@ -7,6 +8,7 @@ namespace AbySalto.Mid.WebApi
         public static IServiceCollection AddPresentation(this IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<EnsureUserExistsFilter>();
             services.AddOpenApi();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>

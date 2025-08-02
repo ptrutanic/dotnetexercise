@@ -3,6 +3,11 @@ using AbySalto.Mid.Infrastructure.External;
 using AbySalto.Mid.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using AbySalto.Mid.Infrastructure.Auth;
+using AbySalto.Mid.Domain.Auth;
 
 namespace AbySalto.Mid.Infrastructure.Configuration
 {
@@ -12,6 +17,7 @@ namespace AbySalto.Mid.Infrastructure.Configuration
         {
             services.AddServices();
             services.AddDatabase();
+            services.AddAuth();
 
             return services;
         }
@@ -28,6 +34,27 @@ namespace AbySalto.Mid.Infrastructure.Configuration
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(EnvConfig.DB_CONNECTION_STRING));
+
+            return services;
+        }
+
+        private static IServiceCollection AddAuth(this IServiceCollection services)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = $"https://{EnvConfig.AUTH0_DOMAIN}/";
+                    options.Audience = EnvConfig.AUTH0_AUDIENCE;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = ClaimTypes.NameIdentifier
+                    };
+                });
+
+            services.AddAuthorization();
+
+            services.AddHttpContextAccessor();
+            services.AddScoped<IIdentity, Identity>();
 
             return services;
         }

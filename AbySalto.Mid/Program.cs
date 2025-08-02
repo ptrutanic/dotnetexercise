@@ -1,5 +1,6 @@
 using AbySalto.Mid.Application;
 using AbySalto.Mid.Infrastructure.Configuration;
+using AbySalto.Mid.WebApi.Filters;
 
 namespace AbySalto.Mid.WebApi
 {
@@ -28,6 +29,11 @@ namespace AbySalto.Mid.WebApi
                 });
             });
 
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.AddService<EnsureUserExistsFilter>();
+            });
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -43,6 +49,7 @@ namespace AbySalto.Mid.WebApi
 
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
 

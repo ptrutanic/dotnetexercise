@@ -1,4 +1,5 @@
 ﻿using AbySalto.Mid.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbySalto.Mid.WebApi.Controllers
@@ -10,6 +11,7 @@ namespace AbySalto.Mid.WebApi.Controllers
         private readonly ProductService _productService = productService;
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> List()
         {
             var products = await _productService.GetProductsAsync();
