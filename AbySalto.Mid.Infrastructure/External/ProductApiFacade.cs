@@ -11,7 +11,7 @@ namespace AbySalto.Mid.Infrastructure.External
 
         public async Task<ProductListResponseDto> GetProductsAsync()
         {
-            var response = await _httpClient.GetAsync("https://dummyjson.com/products");
+            var response = await _httpClient.GetAsync(EnvConfig.PRODUCT_API_URL);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();

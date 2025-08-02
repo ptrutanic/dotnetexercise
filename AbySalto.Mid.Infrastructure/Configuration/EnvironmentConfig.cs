@@ -10,6 +10,7 @@ namespace AbySalto.Mid.Infrastructure.Configuration
         public static readonly string DB_CONNECTION_STRING;
         public static readonly string AUTH0_DOMAIN;
         public static readonly string AUTH0_AUDIENCE;
+        public static readonly string PRODUCT_API_URL;
 
         static EnvConfig()
         {
@@ -21,6 +22,7 @@ namespace AbySalto.Mid.Infrastructure.Configuration
             DB_CONNECTION_STRING = $"Server=localhost;Database={POSTGRES_DB};Username={POSTGRES_USER};Password={POSTGRES_PASSWORD}";
             AUTH0_DOMAIN = GetRequired("AUTH0_DOMAIN");
             AUTH0_AUDIENCE = GetRequired("AUTH0_AUDIENCE");
+            PRODUCT_API_URL = GetRequired("PRODUCT_API_URL");
         }
 
         private static string GetRequired(string key)
