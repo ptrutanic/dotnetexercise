@@ -8,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using AbySalto.Mid.Infrastructure.Auth;
 using AbySalto.Mid.Domain.Auth;
+using AbySalto.Mid.Infrastructure.Persistence.Repository;
+using AbySalto.Mid.Domain.User;
 
 namespace AbySalto.Mid.Infrastructure.Configuration
 {
@@ -25,6 +27,7 @@ namespace AbySalto.Mid.Infrastructure.Configuration
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IProductApiFacade, ProductApiFacade>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddSingleton(JsonOptionsProvider.DefaultOptions);
 
             return services;

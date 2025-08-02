@@ -1,12 +1,14 @@
 
+using AbySalto.Mid.Application.User;
 using AbySalto.Mid.Domain.Auth;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace AbySalto.Mid.WebApi.Filters
 {
-    public class EnsureIdentityExistsFilter(IIdentity identity) : IAsyncActionFilter
+    public class EnsureIdentityExistsFilter(IIdentity identity, IUserRegistrationService userRegistrationService) : IAsyncActionFilter
     {
         private readonly IIdentity _identity = identity;
+        private readonly IUserRegistrationService _userRegistrationService = userRegistrationService;
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -16,8 +18,7 @@ namespace AbySalto.Mid.WebApi.Filters
                 return;
             }
 
-            var IdentityId = _identity.IdentityId;
-
+            await _userRegistrationService.EnsureUserExistsAsync(_identity.IdentityId);
             await next();
         }
     }
