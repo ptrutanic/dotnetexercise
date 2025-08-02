@@ -13,5 +13,6 @@ namespace AbySalto.Mid.Infrastructure.Auth
             _httpContext.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
         public bool IsAuthenticated =>
             _httpContext.HttpContext?.User?.Identity?.IsAuthenticated ?? false;
+        public int? AppUserId { get; set; }
     }
 }

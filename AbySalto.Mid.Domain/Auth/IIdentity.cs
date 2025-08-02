@@ -4,5 +4,6 @@ namespace AbySalto.Mid.Domain.Auth
     {
         string IdentityId { get; }
         bool IsAuthenticated { get; }
+        int? AppUserId { get; set; }
     }
 }
