@@ -8,7 +8,7 @@ namespace AbySalto.Mid.WebApi
         public static IServiceCollection AddPresentation(this IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<EnsureUserExistsFilter>();
+            services.AddScoped<EnsureIdentityExistsFilter>();
             services.AddOpenApi();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>

@@ -31,7 +31,7 @@ namespace AbySalto.Mid.WebApi
 
             builder.Services.AddControllers(options =>
             {
-                options.Filters.AddService<EnsureUserExistsFilter>();
+                options.Filters.AddService<EnsureIdentityExistsFilter>();
             });
 
             var app = builder.Build();
