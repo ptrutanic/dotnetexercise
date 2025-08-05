@@ -15,6 +15,7 @@ import StarIcon from "@mui/icons-material/Star";
 import "./Product.css";
 import { useState } from "react";
 import { favoriteProduct } from "../../api/products";
+import ProductDetailsDialog from "../productDetailsDialog.tsx/ProductDetailsDialog";
 
 interface ProductProps {
   product: ProductListProduct;
@@ -23,16 +24,30 @@ interface ProductProps {
 export default function Product({ product }: ProductProps) {
   const [isFavorite, setIsFavorite] = useState(product.isFavorite);
 
+  const [isDetailsDialogOpen, setIsDetailsDialogOpen] =
+    useState<boolean>(false);
+
   const handleFavoriteProduct = async () => {
     const result: ProductFavoriteResponse = (await favoriteProduct(product.id))
       .data;
     setIsFavorite(result.isFavorite);
   };
 
+  const toggleProductDetailsDialog = async (isOpen: boolean) => {
+    setIsDetailsDialogOpen(isOpen);
+  };
+
   return (
     <div className="product-container">
+      {isDetailsDialogOpen && (
+        <ProductDetailsDialog
+          productId={product.id}
+          open={isDetailsDialogOpen}
+          handleClose={() => toggleProductDetailsDialog(false)}
+        />
+      )}
       <Card sx={{ width: 300 }}>
-        <CardActionArea>
+        <CardActionArea onClick={() => toggleProductDetailsDialog(true)}>
           <CardMedia
             sx={{
               width: 100,
@@ -50,7 +65,10 @@ export default function Product({ product }: ProductProps) {
           </CardContent>
         </CardActionArea>
         <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-          <div onClick={() => handleFavoriteProduct()}>
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => handleFavoriteProduct()}
+          >
             {isFavorite ? <StarIcon /> : <StarOutlineIcon />}
           </div>
           <Typography>{product.price} €</Typography>

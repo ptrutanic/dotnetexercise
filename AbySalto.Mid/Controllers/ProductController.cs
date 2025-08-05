@@ -19,6 +19,19 @@ namespace AbySalto.Mid.WebApi.Controllers
             return Ok(products);
         }
 
+        [HttpGet("{id:int}")]
+        [Authorize]
+        public async Task<IActionResult> Get(int id)
+        {
+            var product = await _productService.GetProductByIdAsync(id);
+
+            if (product == null)
+                return NotFound();
+
+            return Ok(product);
+        }
+
+
         [HttpPost("favorite")]
         [Authorize]
         public async Task<IActionResult> Favorite([FromBody] FavoriteProductDto favoriteProductDto)

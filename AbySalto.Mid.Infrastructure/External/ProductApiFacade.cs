@@ -25,5 +25,22 @@ namespace AbySalto.Mid.Infrastructure.External
 
             return productResponse;
         }
+
+        public async Task<ProductDetailsDto> GetProductDetailsAsync(int productId)
+        {
+            var response = await _httpClient.GetAsync($"{EnvConfig.PRODUCT_API_URL}/{productId}");
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            var productResponse = JsonSerializer.Deserialize<ProductDetailsDto>(content, JsonOptionsProvider.DefaultOptions);
+
+            if (productResponse == null)
+            {
+                return new ProductDetailsDto();
+            }
+
+            return productResponse;
+        }
     }
 }

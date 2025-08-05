@@ -36,6 +36,11 @@ namespace AbySalto.Mid.Application.Product
             };
         }
 
+        public async Task<ProductDetailsDto> GetProductByIdAsync(int productId)
+        {
+            return await _productApiFacade.GetProductDetailsAsync(productId);
+        }
+
         public async Task<bool> ToggleProductFavoriteAsync(int productId)
         {
             var favorite = await _favoriteRepository.FindByUserAndProductAsync(_identity.AppUserId, productId);
