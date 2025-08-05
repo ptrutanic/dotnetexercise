@@ -5,5 +5,6 @@ namespace AbySalto.Mid.Application.Product
     public interface IProductService
     {
         Task<ProductListWithFavoritesDto> GetProductsAsync();
+        Task<bool> ToggleProductFavoriteAsync(int productId);
     }
 }

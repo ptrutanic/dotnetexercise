@@ -1,4 +1,5 @@
 ﻿using AbySalto.Mid.Application.Product;
+using AbySalto.Mid.WebApi.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +19,11 @@ namespace AbySalto.Mid.WebApi.Controllers
             return Ok(products);
         }
 
-        [HttpPost]
+        [HttpPost("favorite")]
         [Authorize]
-        public async Task<IActionResult> Favorite([FromBody] int id)
+        public async Task<IActionResult> Favorite([FromBody] FavoriteProductDto favoriteProductDto)
         {
-            var isFavorite = await _productService.GetProductsAsync();
+            var isFavorite = await _productService.ToggleProductFavoriteAsync(favoriteProductDto.Id);
             return Ok(new { isFavorite });
         }
     }

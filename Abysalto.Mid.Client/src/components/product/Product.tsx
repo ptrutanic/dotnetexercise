@@ -6,7 +6,10 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import type { ProductListProduct } from "../../models/Product";
+import type {
+  ProductFavoriteResponse,
+  ProductListProduct,
+} from "../../models/Product";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import StarIcon from "@mui/icons-material/Star";
 import "./Product.css";
@@ -20,9 +23,10 @@ interface ProductProps {
 export default function Product({ product }: ProductProps) {
   const [isFavorite, setIsFavorite] = useState(product.isFavorite);
 
-  const handleFavoriteProduct = () => {
-    favoriteProduct(product.id);
-    setIsFavorite((previousValue) => !previousValue);
+  const handleFavoriteProduct = async () => {
+    const result: ProductFavoriteResponse = (await favoriteProduct(product.id))
+      .data;
+    setIsFavorite(result.isFavorite);
   };
 
   return (

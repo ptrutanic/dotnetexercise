@@ -5,7 +5,7 @@ import type {
   ProductListProduct,
   ProductListResult,
 } from "../../models/Product";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Product from "../product/Product";
 
 export default function ProductList() {
@@ -45,10 +45,10 @@ export default function ProductList() {
 
   return (
     <div>
-      <h2>Products</h2>
-      <h3>
+      <Typography variant="h2">Products</Typography>
+      <Typography variant="subtitle1">
         Loaded {products.length}/{total}
-      </h3>
+      </Typography>
       <div className="product-list">
         {products.map((product) => (
           <Product key={product.id} product={product} />

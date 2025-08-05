@@ -10,3 +10,7 @@ export type ProductListProduct = {
   thumbnail: string;
   isFavorite: boolean;
 };
+
+export type ProductFavoriteResponse = {
+  isFavorite: boolean;
+};

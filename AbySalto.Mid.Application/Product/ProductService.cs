@@ -35,5 +35,21 @@ namespace AbySalto.Mid.Application.Product
                 Total = productsResponse.Total
             };
         }
+
+        public async Task<bool> ToggleProductFavoriteAsync(int productId)
+        {
+            var favorite = await _favoriteRepository.FindByUserAndProductAsync(_identity.AppUserId, productId);
+
+            if (favorite is not null)
+            {
+                await _favoriteRepository.DeleteAsync(favorite);
+                return false;
+            }
+            else
+            {
+                await _favoriteRepository.AddAsync(new Favorite(_identity.AppUserId, productId));
+                return true;
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ const getProduct = (id: number) => {
 };
 
 const favoriteProduct = (id: number) => {
-  return axios.post(`${config.serverApiUrl}/product`, {
+  return axios.post(`${config.serverApiUrl}/product/favorite`, {
     id,
   });
 };
