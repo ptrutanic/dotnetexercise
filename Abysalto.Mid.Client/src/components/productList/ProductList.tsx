@@ -5,7 +5,7 @@ import type {
   ProductListProduct,
   ProductListResult,
 } from "../../models/Product";
-import { Button, CircularProgress } from "@mui/material";
+import { Button } from "@mui/material";
 import Product from "../product/Product";
 
 export default function ProductList() {
@@ -63,5 +63,4 @@ export default function ProductList() {
       </Button>
     </div>
   );
-  return loading ? <CircularProgress /> : <div>Loaded</div>;
 }

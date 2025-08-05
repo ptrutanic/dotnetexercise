@@ -10,12 +10,21 @@ import type { ProductListProduct } from "../../models/Product";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import StarIcon from "@mui/icons-material/Star";
 import "./Product.css";
+import { useState } from "react";
+import { favoriteProduct } from "../../api/products";
 
 interface ProductProps {
   product: ProductListProduct;
 }
 
 export default function Product({ product }: ProductProps) {
+  const [isFavorite, setIsFavorite] = useState(product.isFavorite);
+
+  const handleFavoriteProduct = () => {
+    favoriteProduct(product.id);
+    setIsFavorite((previousValue) => !previousValue);
+  };
+
   return (
     <div className="product-container">
       <Card sx={{ width: 300 }}>
@@ -37,7 +46,9 @@ export default function Product({ product }: ProductProps) {
           </CardContent>
         </CardActionArea>
         <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-          {product.isFavorite ? <StarIcon /> : <StarOutlineIcon />}
+          <div onClick={() => handleFavoriteProduct()}>
+            {isFavorite ? <StarIcon /> : <StarOutlineIcon />}
+          </div>
           <Typography>{product.price} €</Typography>
         </CardActions>
       </Card>

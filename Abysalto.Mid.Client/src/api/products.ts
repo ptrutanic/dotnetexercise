@@ -9,4 +9,10 @@ const getProduct = (id: number) => {
   return axios.get(`${config.serverApiUrl}/product/${id}`);
 };
 
-export { getProducts, getProduct };
+const favoriteProduct = (id: number) => {
+  return axios.post(`${config.serverApiUrl}/product`, {
+    id,
+  });
+};
+
+export { getProducts, getProduct, favoriteProduct };
