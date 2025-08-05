@@ -1,18 +1,17 @@
 import { useAxiosInterceptor } from "./hooks/useAxiosInterceptor";
 import Navbar from "./components/Navbar";
+import ProductList from "./components/productList/ProductList";
+import AuthGuard from "./components/AuthGuard";
 
 function App() {
   useAxiosInterceptor();
 
-  // const callProducts = () => {
-  //   axios.get("http://localhost:5269/api/product").then((data) => {
-  //     console.log(data);
-  //   });
-  // };
-
   return (
     <div>
       <Navbar />
+      <AuthGuard>
+        <ProductList />
+      </AuthGuard>
     </div>
   );
 }
