@@ -1,20 +1,20 @@
 
 using AbySalto.Mid.Application.Dtos;
-using AbySalto.Mid.Application.Favorite;
 using AbySalto.Mid.Domain.Auth;
 using AbySalto.Mid.Domain.External;
+using AbySalto.Mid.Domain.Favorite;
 
 namespace AbySalto.Mid.Application.Product
 {
-    public class ProductService(IProductApiFacade productApiFacade, IIdentity identity, IFavoriteService favoriteService) : IProductService
+    public class ProductService(IProductApiFacade productApiFacade, IIdentity identity, IFavoriteRepository favoriteRepository) : IProductService
     {
         private readonly IProductApiFacade _productApiFacade = productApiFacade;
         private readonly IIdentity _identity = identity;
-        private readonly IFavoriteService _favoriteService = favoriteService;
+        private readonly IFavoriteRepository _favoriteRepository = favoriteRepository;
 
         public async Task<ProductListWithFavoritesDto> GetProductsAsync()
         {
-            List<Domain.Favorite.Favorite> userFavorites = await _favoriteService.GetByUserIdAsync(_identity.AppUserId);
+            List<Favorite> userFavorites = await _favoriteRepository.FindByUserIdAsync(_identity.AppUserId);
             ProductListResponseDto productsResponse = await _productApiFacade.GetProductsAsync();
 
             var userFavoritesIds = userFavorites.Select(favorite => favorite.ExternalProductId);
