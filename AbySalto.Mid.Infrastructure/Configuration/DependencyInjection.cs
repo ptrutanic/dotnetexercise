@@ -10,6 +10,7 @@ using AbySalto.Mid.Infrastructure.Auth;
 using AbySalto.Mid.Domain.Auth;
 using AbySalto.Mid.Infrastructure.Persistence.Repository;
 using AbySalto.Mid.Domain.User;
+using AbySalto.Mid.Domain.Favorite;
 
 namespace AbySalto.Mid.Infrastructure.Configuration
 {
@@ -28,6 +29,7 @@ namespace AbySalto.Mid.Infrastructure.Configuration
         {
             services.AddScoped<IProductApiFacade, ProductApiFacade>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IFavoriteRepository, FavoriteRepository>();
             services.AddSingleton(JsonOptionsProvider.DefaultOptions);
 
             return services;

@@ -1,4 +1,4 @@
-namespace AbySalto.Mid.Domain.Entities
+namespace AbySalto.Mid.Domain
 {
     public class BaseEntity
     {
