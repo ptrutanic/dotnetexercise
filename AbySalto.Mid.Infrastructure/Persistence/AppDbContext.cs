@@ -22,6 +22,10 @@ namespace AbySalto.Mid.Infrastructure.Persistence
                     .WithMany(u => u.Favorites)
                     .HasForeignKey(f => f.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+                entity
+                    .HasIndex(f => new { f.UserId, f.ExternalProductId })
+                    .IsUnique();
             });
         }
     }

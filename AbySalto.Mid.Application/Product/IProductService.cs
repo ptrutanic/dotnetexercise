@@ -1,9 +1,9 @@
-using AbySalto.Mid.Domain.External;
+using AbySalto.Mid.Application.Dtos;
 
 namespace AbySalto.Mid.Application.Product
 {
     public interface IProductService
     {
-        Task<ProductListResponseDto> GetProductsAsync();
+        Task<ProductListWithFavoritesDto> GetProductsAsync();
     }
 }
