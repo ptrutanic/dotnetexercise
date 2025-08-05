@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { useAxiosInterceptor } from "./hooks/useAxiosInterceptor";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 function App() {
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
@@ -31,6 +32,7 @@ function App() {
           <img src={user.picture} alt={user.name} />
           <h2>{user.name}</h2>
           <p>{user.email}</p>
+          <Button variant="outlined">Outlined</Button>
         </div>
       )}
     </div>
