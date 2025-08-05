@@ -1,4 +1,4 @@
-﻿using AbySalto.Mid.Application.Services;
+﻿using AbySalto.Mid.Application.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,9 +6,9 @@ namespace AbySalto.Mid.WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductController(ProductService productService) : Controller
+    public class ProductController(IProductService productService) : Controller
     {
-        private readonly ProductService _productService = productService;
+        private readonly IProductService _productService = productService;
 
         [HttpGet]
         [Authorize]

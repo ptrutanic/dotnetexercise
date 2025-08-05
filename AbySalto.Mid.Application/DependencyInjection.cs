@@ -1,4 +1,4 @@
-﻿using AbySalto.Mid.Application.Services;
+﻿using AbySalto.Mid.Application.Product;
 using AbySalto.Mid.Application.User;
 using Microsoft.Extensions.DependencyInjection;
 namespace AbySalto.Mid.Application
@@ -7,7 +7,7 @@ namespace AbySalto.Mid.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<ProductService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUserRegistrationService, UserRegistrationService>();
 
             return services;
