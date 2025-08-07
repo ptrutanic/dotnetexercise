@@ -13,9 +13,13 @@ namespace AbySalto.Mid.WebApi.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List([FromQuery] ProductListQueryDto query)
         {
-            var products = await _productService.GetProductsAsync();
+            var (isValid, errorMessage) = query.Validate();
+            if (!isValid)
+                return BadRequest(errorMessage);
+
+            var products = await _productService.GetProductsAsync(query.Page, query.SortByPrice);
             return Ok(products);
         }
 
