@@ -7,6 +7,8 @@ import type {
 } from "../../models/Product";
 import { Button, Typography } from "@mui/material";
 import Product from "../product/Product";
+import ProductSort from "../productSort/ProductSort";
+import { PriceSortType } from "../../constants/PriceSortType";
 
 export default function ProductList() {
   const [products, setProducts] = useState<ProductListProduct[]>([]);
@@ -18,7 +20,9 @@ export default function ProductList() {
 
   const loadProducts = useCallback(async (page: number = 1) => {
     try {
-      const result: ProductListResult = (await getProducts(page)).data;
+      const result: ProductListResult = (
+        await getProducts(page, PriceSortType.HIGHER_FIRST)
+      ).data;
       setTotal(result.total);
       setProducts((prevProducts) => [...prevProducts, ...result.products]);
     } catch (err) {
@@ -27,6 +31,10 @@ export default function ProductList() {
       setLoading(false);
     }
   }, []);
+
+  const handleProductSort = (priceSortType: PriceSortType) => {
+    console.log(priceSortType);
+  };
 
   const loadMoreProducts = () => {
     if (loading || products.length >= total) return;
@@ -49,6 +57,7 @@ export default function ProductList() {
       <Typography variant="subtitle1">
         Loaded {products.length}/{total}
       </Typography>
+      <ProductSort onChange={handleProductSort} />
       <div className="product-list">
         {products.map((product) => (
           <Product key={product.id} product={product} />
