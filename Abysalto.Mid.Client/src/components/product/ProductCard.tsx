@@ -12,16 +12,16 @@ import type {
 } from "../../models/Product";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import StarIcon from "@mui/icons-material/Star";
-import "./Product.css";
+import "./ProductCard.css";
 import { useState } from "react";
 import { favoriteProduct } from "../../api/products";
 import ProductDetailsDialog from "../productDetailsDialog.tsx/ProductDetailsDialog";
 
-interface ProductProps {
+interface ProductCardProps {
   product: ProductListProduct;
 }
 
-export default function Product({ product }: ProductProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   const [isFavorite, setIsFavorite] = useState(product.isFavorite);
 
   const [isDetailsDialogOpen, setIsDetailsDialogOpen] =

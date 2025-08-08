@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./ProductList.css";
 import { Button, Typography } from "@mui/material";
-import Product from "../product/Product";
+import ProductCard from "../product/ProductCard";
 import ProductSort from "../productSort/ProductSort";
 import { PriceSortType } from "../../constants/PriceSortType";
 import { useProductsList } from "../../hooks/useProductsList";
@@ -32,7 +32,7 @@ export default function ProductList() {
       <ProductSort onChange={handleProductSort} />
       <div className="product-list">
         {products.map((product) => (
-          <Product key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
       <Button
