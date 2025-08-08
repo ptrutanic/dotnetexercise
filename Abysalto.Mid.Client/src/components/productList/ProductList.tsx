@@ -4,14 +4,14 @@ import { Button, Typography } from "@mui/material";
 import Product from "../product/Product";
 import ProductSort from "../productSort/ProductSort";
 import { PriceSortType } from "../../constants/PriceSortType";
-import { useProducts } from "../../hooks/useProducts";
+import { useProductsList } from "../../hooks/useProductsList";
 
 export default function ProductList() {
   const [page, setPage] = useState(1);
   const [priceSortType, setPriceSortType] = useState<PriceSortType>(
     PriceSortType.DEFAULT
   );
-  const { products, loading, total, error } = useProducts(page, priceSortType);
+  const { products, loading, total } = useProductsList(page, priceSortType);
 
   const loadMoreProducts = () => {
     if (loading || products.length >= total) return;

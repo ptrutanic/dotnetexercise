@@ -3,7 +3,7 @@ import { PriceSortType } from "../constants/PriceSortType";
 import type { ProductListProduct, ProductListResult } from "../models/Product";
 import { getProducts } from "../api/products";
 
-export const useProducts = (page: number, priceSortType: PriceSortType) => {
+export const useProductsList = (page: number, priceSortType: PriceSortType) => {
   const [products, setProducts] = useState<ProductListProduct[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
