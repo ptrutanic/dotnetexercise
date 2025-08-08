@@ -53,17 +53,19 @@ export const useCart = () => {
 
   const addToCart = async (productId: number) => {
     const newProduct: CartItemRequestModel = { productId, quantity: 1 };
-    const newCart: CartRequestModel = { cartItems: [] };
+    const cartItems = cart?.cartItems ?? [];
 
-    if (!cart) {
-      newCart.cartItems = [newProduct];
-    } else {
-      const alreadyExists =
-        cart && cart.cartItems.map((x) => x.productId).includes(productId);
+    const existing = cartItems.find((item) => item.productId === productId);
 
-      if (alreadyExists) return;
-      newCart.cartItems = [...cart.cartItems, newProduct];
-    }
+    const newCart: CartRequestModel = {
+      cartItems: existing
+        ? cartItems.map((item) =>
+            item.productId === productId
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          )
+        : [...cartItems, newProduct],
+    };
 
     const response = await updateCart(newCart);
     if (!response.data) throw new Error("Failed to fetch");
