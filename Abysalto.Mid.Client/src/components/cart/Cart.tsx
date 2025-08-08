@@ -11,9 +11,12 @@ import {
 import "./Cart.css";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function Cart() {
-  const { cart, loading, reload } = useContext(CartContext);
+  const { cart, loading, reload, addToCart, removeFromCart } =
+    useContext(CartContext);
 
   return (
     <div>
@@ -49,6 +52,14 @@ export default function Cart() {
                   <TableCell align="right">{cartItem.quantity}</TableCell>
                   <TableCell align="right">{cartItem.pricePerItem}</TableCell>
                   <TableCell align="right">{cartItem.totalPrice}</TableCell>
+                  <TableCell align="right">
+                    <div onClick={() => removeFromCart(cartItem.productId)}>
+                      <RemoveIcon sx={{ cursor: "pointer" }} />
+                    </div>
+                    <div onClick={() => addToCart(cartItem.productId)}>
+                      <AddIcon sx={{ cursor: "pointer" }} />
+                    </div>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

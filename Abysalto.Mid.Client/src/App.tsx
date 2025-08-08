@@ -8,10 +8,10 @@ import { useCart } from "./hooks/useCart";
 
 function App() {
   useAxiosInterceptor();
-  const { cart, loading, reload, addToCart } = useCart();
+  const { cart, loading, reload, addToCart, removeFromCart } = useCart();
 
   return (
-    <CartContext value={{ cart, loading, reload, addToCart }}>
+    <CartContext value={{ cart, loading, reload, addToCart, removeFromCart }}>
       <Navbar />
       <AuthGuard>
         <Cart />

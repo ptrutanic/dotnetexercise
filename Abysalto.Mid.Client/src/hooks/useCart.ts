@@ -73,5 +73,27 @@ export const useCart = () => {
     setCart(result);
   };
 
-  return { cart, loading, error, reload: fetchCart, addToCart };
+  const removeFromCart = async (productId: number) => {
+    const cartItems = cart?.cartItems ?? [];
+
+    const newCart: CartRequestModel = {
+      cartItems: cartItems
+        .map((cartItem) => {
+          if (cartItem.productId !== productId) return cartItem;
+
+          cartItem.quantity = cartItem.quantity - 1;
+
+          if (cartItem.quantity <= 0) return null;
+          return cartItem;
+        })
+        .filter((cartItem) => !!cartItem),
+    };
+
+    const response = await updateCart(newCart);
+    if (!response.data) throw new Error("Failed to fetch");
+    const result: Cart = response.data;
+    setCart(result);
+  };
+
+  return { cart, loading, error, reload: fetchCart, addToCart, removeFromCart };
 };

@@ -6,6 +6,7 @@ export type CartContext = {
   loading: boolean;
   reload: () => void;
   addToCart: (productId: number) => void;
+  removeFromCart: (productId: number) => void;
 };
 
 const defaultCartContext: CartContext = {
@@ -13,6 +14,7 @@ const defaultCartContext: CartContext = {
   loading: false,
   reload: () => {},
   addToCart: () => {},
+  removeFromCart: () => {},
 };
 
 export const CartContext = createContext<CartContext>(defaultCartContext);
