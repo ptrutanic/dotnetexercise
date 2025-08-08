@@ -2,7 +2,6 @@ using AbySalto.Mid.Application.Dtos;
 using AbySalto.Mid.Application.Product;
 using AbySalto.Mid.Domain.Auth;
 using AbySalto.Mid.Domain.Cart;
-using AbySalto.Mid.Domain.External;
 using AbySalto.Mid.Domain.User;
 
 namespace AbySalto.Mid.Application.Cart
@@ -36,7 +35,7 @@ namespace AbySalto.Mid.Application.Cart
                     if (product == null)
                         throw new InvalidOperationException($"Product not found: {cartItemDto.ProductId}");
 
-                    return new CartItem(cartItemDto.ProductId, product.Price, cartItemDto.Quantity);
+                    return new CartItem(cartItemDto.ProductId, product.Title, product.Price, cartItemDto.Quantity);
                 })
             )).ToList();
 

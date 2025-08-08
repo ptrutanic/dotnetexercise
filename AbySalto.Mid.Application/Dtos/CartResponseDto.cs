@@ -31,7 +31,8 @@ namespace AbySalto.Mid.Application.Dtos
                 ProductId = cartItem.ExternalProductId,
                 Quantity = cartItem.Quantity,
                 PricePerItem = cartItem.PricePerItem,
-                TotalPrice = cartItem.TotalPrice
+                TotalPrice = cartItem.TotalPrice,
+                Title = cartItem.Title
             }).ToList();
         }
 
@@ -39,6 +40,7 @@ namespace AbySalto.Mid.Application.Dtos
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public decimal PricePerItem { get; set; }
+        public string? Title { get; set; } = "";
         public decimal TotalPrice { get; set; }
     }
 }

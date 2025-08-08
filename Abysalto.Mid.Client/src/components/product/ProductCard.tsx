@@ -13,9 +13,11 @@ import type {
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import StarIcon from "@mui/icons-material/Star";
 import "./ProductCard.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { favoriteProduct } from "../../api/products";
 import ProductDetailsDialog from "../productDetailsDialog.tsx/ProductDetailsDialog";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { CartContext } from "../../context/CartContext";
 
 interface ProductCardProps {
   product: ProductListProduct;
@@ -23,6 +25,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const [isFavorite, setIsFavorite] = useState(product.isFavorite);
+  const { addToCart } = useContext(CartContext);
 
   const [isDetailsDialogOpen, setIsDetailsDialogOpen] =
     useState<boolean>(false);
@@ -65,11 +68,19 @@ export default function ProductCard({ product }: ProductCardProps) {
           </CardContent>
         </CardActionArea>
         <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => handleFavoriteProduct()}
-          >
-            {isFavorite ? <StarIcon /> : <StarOutlineIcon />}
+          <div className="card-actions">
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => handleFavoriteProduct()}
+            >
+              {isFavorite ? <StarIcon /> : <StarOutlineIcon />}
+            </div>
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => addToCart(product.id)}
+            >
+              <AddShoppingCartIcon />
+            </div>
           </div>
           <Typography>{product.price} €</Typography>
         </CardActions>

@@ -23,7 +23,7 @@ namespace AbySalto.Mid.Domain.Cart
 
     public class CartItem
     {
-        public CartItem(int externalProductId, decimal pricePerItem, int quantity)
+        public CartItem(int externalProductId, string? title, decimal pricePerItem, int quantity)
         {
             if (quantity <= 0)
             {
@@ -38,11 +38,13 @@ namespace AbySalto.Mid.Domain.Cart
             ExternalProductId = externalProductId;
             Quantity = quantity;
             PricePerItem = pricePerItem;
+            Title = title;
         }
 
         public int ExternalProductId { get; set; }
         public int Quantity { get; set; }
         public decimal PricePerItem { get; set; }
+        public string? Title { get; set; } = "";
         public decimal TotalPrice => Quantity * PricePerItem;
     }
 }

@@ -1,3 +1,11 @@
 .product-container {
   margin: 1rem;
 }
+
+.card-actions {
+  display: flex;
+}
+
+.card-actions > div {
+  margin-right: 0.5rem;
+}
