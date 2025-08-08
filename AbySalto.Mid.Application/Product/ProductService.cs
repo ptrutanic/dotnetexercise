@@ -12,7 +12,7 @@ namespace AbySalto.Mid.Application.Product
         private readonly IIdentity _identity = identity;
         private readonly IFavoriteRepository _favoriteRepository = favoriteRepository;
 
-        public async Task<ProductListWithFavoritesDto> GetProductsAsync(int page, string? sortByPrice)
+        public async Task<ProductListWithFavoritesDto> GetProductsAsync(int page, string sortByPrice)
         {
             List<Favorite> userFavorites = await _favoriteRepository.FindByUserIdAsync(_identity.AppUserId);
             ProductListResponseDto productsResponse = await _productApiFacade.GetProductsAsync(page, sortByPrice);

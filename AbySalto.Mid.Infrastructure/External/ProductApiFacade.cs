@@ -9,12 +9,12 @@ namespace AbySalto.Mid.Infrastructure.External
     {
         private readonly HttpClient _httpClient = httpClient;
 
-        public async Task<ProductListResponseDto> GetProductsAsync(int page, string? sortByPrice)
+        public async Task<ProductListResponseDto> GetProductsAsync(int page, string sortByPrice)
         {
             int limit = 10;
             var skip = (page - 1) * limit;
             string pagination = $"?limit={limit}&skip={skip}";
-            string priceSort = sortByPrice is not null ? $"&sortBy=price&order={sortByPrice}" : "";
+            string priceSort = sortByPrice != "" ? $"&sortBy=price&order={sortByPrice}" : "";
 
             var response = await _httpClient.GetAsync($"{EnvConfig.PRODUCT_API_URL}/{pagination}{priceSort}");
             response.EnsureSuccessStatusCode();

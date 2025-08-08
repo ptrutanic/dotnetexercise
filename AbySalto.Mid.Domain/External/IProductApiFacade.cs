@@ -2,7 +2,7 @@ namespace AbySalto.Mid.Domain.External
 {
     public interface IProductApiFacade
     {
-        Task<ProductListResponseDto> GetProductsAsync(int page, string? sortByPrice);
+        Task<ProductListResponseDto> GetProductsAsync(int page, string sortByPrice);
         Task<ProductDetailsDto> GetProductDetailsAsync(int productId);
     }
 
