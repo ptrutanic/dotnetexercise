@@ -4,5 +4,6 @@ namespace AbySalto.Mid.Domain.User
     {
         Task<User?> FindByIdentityProviderIdAsync(string identityProviderId);
         Task AddAsync(User user);
+        Task UpdateAsync(User user);
     }
 }

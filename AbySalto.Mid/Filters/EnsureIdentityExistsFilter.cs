@@ -18,7 +18,7 @@ namespace AbySalto.Mid.WebApi.Filters
                 return;
             }
 
-            var appUserId = await _userRegistrationService.EnsureUserExistsAsync(_identity.IdentityId);
+            var appUserId = await _userRegistrationService.EnsureUserExistsAsync(_identity.IdentityProviderId);
             _identity.AppUserId = appUserId;
             await next();
         }

@@ -2,7 +2,7 @@ namespace AbySalto.Mid.Domain.Auth
 {
     public interface IIdentity
     {
-        string IdentityId { get; }
+        string IdentityProviderId { get; }
         bool IsAuthenticated { get; }
         int AppUserId { get; set; }
     }
